@@ -13,12 +13,10 @@ class ImguiTestEngineConan(ConanFile):
     exports_sources = "CMakeLists.txt",
 
     def requirements(self):
-        self.requires(f"imgui/tag_docking_6.1", transitive_headers=True)
+        self.requires(f"imgui/local@", transitive_headers=True)
 
-    def source(self):
-        url = self.conan_data["sources"]["url"].format(version=self.version)
-        conan.tools.files.get(self, url,
-                            **self.conan_data["sources"][self.version], strip_root=True)
+    def export_sources(self):
+        conan.tools.files.copy(self, "*", self.recipe_folder, self.export_sources_folder)
 
     def generate(self):
         tc = CMakeToolchain(self)
