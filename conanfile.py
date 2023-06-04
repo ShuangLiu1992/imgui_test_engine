@@ -28,3 +28,7 @@ class ImguiTestEngineConan(ConanFile):
         cmake.configure()
         cmake.build()
         cmake.install()
+
+    def package_info(self):
+        self.cpp_info.set_property("cmake_file_name", "imgui_test_engine")
+        self.cpp_info.libs = conan.tools.files.collect_libs(self)
