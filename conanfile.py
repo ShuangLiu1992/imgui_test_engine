@@ -21,6 +21,8 @@ class ImguiTestEngineConan(ConanFile):
     def generate(self):
         tc = CMakeToolchain(self)
         tc.variables["CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS"] = 1
+        if self.settings.arch == "x86_64":
+            tc.preprocessor_definitions["__x86_64__"] = 1
         tc.generate()
 
     def build(self):
