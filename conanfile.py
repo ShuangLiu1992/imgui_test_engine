@@ -23,6 +23,8 @@ class ImguiTestEngineConan(ConanFile):
         tc.variables["CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS"] = 1
         if self.settings.arch == "x86_64":
             tc.preprocessor_definitions["__x86_64__"] = 1
+        if self.settings.os == "Emscripten":
+            tc.preprocessor_definitions["_X86_"] = 1
         tc.generate()
 
     def build(self):
